@@ -10,6 +10,7 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
 import{CollectionsModule} from "./modules/collections/collections.module";
+import { PhotosModule } from "./modules/photos/photos.module";
 
 @Module({
 	imports: [
@@ -29,6 +30,7 @@ import{CollectionsModule} from "./modules/collections/collections.module";
 		UsersModule,
 		AuthModule,
 		CollectionsModule,
+		PhotosModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
