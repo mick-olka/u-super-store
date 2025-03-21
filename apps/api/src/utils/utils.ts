@@ -74,10 +74,6 @@ Jimp.read(join(__dirname, "..", "..", "resources", "watermark1.png")).then(
 // 		});
 // 	}
 // };
-export const preparePhotos=(
-	files: Array<Express.Multer.File>,
-	max_size: number,
-)=>{throw null};
 
 export const getFilterForSearch = (
 	search_string: string | null,

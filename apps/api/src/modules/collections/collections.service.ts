@@ -10,7 +10,7 @@ import {
 import { getUrlNameFilter } from 'src/utils/utils'
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
 import { EVENTS } from 'src/utils/constants'
-// import { ProductDeletedEvent } from '../products/events/product-deleted.event'
+import { ProductDeletedEvent } from '../products/events/product-deleted.event'
 import { CollectionItemsUpdatedEvent } from './events/collection-items-updated.event'
 
 type CollectionI = Collection & { _id: mongoose.Types.ObjectId }
@@ -93,15 +93,15 @@ export class CollectionsService {
     return deletedItem
   }
 
-//   @OnEvent(EVENTS.product_deleted)
-//   async handleProductDeletedEvent(event: ProductDeletedEvent) {
-//     // remove product from collections
-//     const p = event.data
-//     for (const i in p.collections) {
-//       await this.updateItems(p.collections[i], {
-//         items: [event.id],
-//         action: 'delete',
-//       })
-//     }
-//   }
+  @OnEvent(EVENTS.product_deleted)
+  async handleProductDeletedEvent(event: ProductDeletedEvent) {
+    // remove product from collections
+    const p = event.data
+    for (const i in p.collections) {
+      await this.updateItems(p.collections[i], {
+        items: [event.id],
+        action: 'delete',
+      })
+    }
+  }
 }
