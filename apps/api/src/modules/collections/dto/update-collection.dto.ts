@@ -1,46 +1,46 @@
-import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator'
-import { default_locales, I_Locales } from 'src/schemas/data'
-import { Product } from 'src/schemas/product.schema'
+import { ApiProperty } from "@nestjs/swagger";
+import { IsArray, IsNumber, IsOptional, IsString } from "class-validator";
+import { type I_Locales, default_locales } from "src/schemas/data";
+import type { Product } from "src/schemas/product.schema";
 
 const notRequired = {
-  required: false,
-}
+	required: false,
+};
 
 export class UpdateCollectionDto {
-  @ApiProperty({ required: false, default: default_locales })
-  @IsOptional()
-  readonly name?: I_Locales
+	@ApiProperty({ required: false, default: default_locales })
+	@IsOptional()
+	readonly name?: I_Locales;
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  @IsString()
-  readonly url_name?: string
+	@ApiProperty(notRequired)
+	@IsOptional()
+	@IsString()
+	readonly url_name?: string;
 
-  @IsOptional()
-  @IsArray()
-  readonly items?: Product[]
+	@IsOptional()
+	@IsArray()
+	readonly items?: Product[];
 
-  @IsOptional()
-  @IsArray()
-  readonly keywords?: string[]
+	@IsOptional()
+	@IsArray()
+	readonly keywords?: string[];
 
-  @ApiProperty({ required: false, default: default_locales })
-  @IsOptional()
-  readonly description?: I_Locales
+	@ApiProperty({ required: false, default: default_locales })
+	@IsOptional()
+	readonly description?: I_Locales;
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  @IsNumber()
-  readonly index?: number
+	@ApiProperty(notRequired)
+	@IsOptional()
+	@IsNumber()
+	readonly index?: number;
 }
 
 export class UpdateCollectionItemsDto {
-  @ApiProperty({ type: [String], default: [] })
-  @IsArray()
-  readonly items?: string[]
+	@ApiProperty({ type: [String], default: [] })
+	@IsArray()
+	readonly items?: string[];
 
-  @ApiProperty({ enum: ['add', 'delete'], default: 'add' })
-  @IsString()
-  readonly action: 'add' | 'delete'
+	@ApiProperty({ enum: ["add", "delete"], default: "add" })
+	@IsString()
+	readonly action: "add" | "delete";
 }

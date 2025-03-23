@@ -1,85 +1,89 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsArray,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator'
-import { default_locales, I_Locales, I_ProductFeatures } from 'src/schemas/data'
-import { Product } from 'src/schemas/product.schema'
-import { File } from 'src/utils/interfaces'
+	IsArray,
+	IsNotEmpty,
+	IsNumber,
+	IsOptional,
+	IsString,
+} from "class-validator";
+import {
+	type I_Locales,
+	type I_ProductFeatures,
+	default_locales,
+} from "src/schemas/data";
+import type { Product } from "src/schemas/product.schema";
+import type { File } from "src/utils/interfaces";
 
 const notRequired = {
-  required: false,
-}
+	required: false,
+};
 
 class ProductDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  code: string
+	@ApiProperty()
+	@IsNotEmpty()
+	@IsString()
+	code: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  // @IsNumber()
-  price: number
+	@ApiProperty()
+	@IsNotEmpty()
+	// @IsNumber()
+	price: number;
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  // @IsNumber()
-  old_price?: number
+	@ApiProperty(notRequired)
+	@IsOptional()
+	// @IsNumber()
+	old_price?: number;
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  @IsString()
-  url_name?: string
+	@ApiProperty(notRequired)
+	@IsOptional()
+	@IsString()
+	url_name?: string;
 
-  @IsOptional()
-  // @IsArray()
-  keywords?: string[]
+	@IsOptional()
+	// @IsArray()
+	keywords?: string[];
 
-  @IsOptional()
-  @IsString()
-  description?: I_Locales
+	@IsOptional()
+	@IsString()
+	description?: I_Locales;
 
-  @IsOptional()
-  features?: I_ProductFeatures
+	@IsOptional()
+	features?: I_ProductFeatures;
 
-  @IsOptional()
-  @IsArray()
-  photos?: string[]
+	@IsOptional()
+	@IsArray()
+	photos?: string[];
 
-  @IsOptional()
-  @IsArray()
-  related_products?: Product[]
+	@IsOptional()
+	@IsArray()
+	related_products?: Product[];
 
-  @IsOptional()
-  @IsArray()
-  similar_products?: Product[]
+	@IsOptional()
+	@IsArray()
+	similar_products?: Product[];
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  // @IsNumber()
-  index?: number
+	@ApiProperty(notRequired)
+	@IsOptional()
+	// @IsNumber()
+	index?: number;
 }
 
 // for swagger
 export class CreateProductMultipartDto extends ProductDto {
-  @ApiProperty({ default: default_locales })
-  @IsString()
-  name: string
+	@ApiProperty({ default: default_locales })
+	@IsString()
+	name: string;
 
-  @ApiProperty({
-    type: 'string',
-    format: 'binary',
-    required: false,
-  })
-  thumbnail?: File
+	@ApiProperty({
+		type: "string",
+		format: "binary",
+		required: false,
+	})
+	thumbnail?: File;
 }
 
 // for internal use
 export class CreateProductDto extends ProductDto {
-  name: I_Locales
-  thumbnail?: string
+	name: I_Locales;
+	thumbnail?: string;
 }

@@ -47,11 +47,11 @@ export const thumbnailInterceptor = FileInterceptor("thumbnail", {
 
 let watermark: object;
 // find watermark
-Jimp.read(join(__dirname, "..", "..", "resources", "watermark1.png")).then(
-	(image) => {
-		watermark = image;
-	},
-);
+Jimp.read(
+	join(__dirname, "..", "..", "..", "resources", "watermark1.png"),
+).then((image) => {
+	watermark = image;
+});
 
 // export const preparePhotos = (
 // 	files: Array<Express.Multer.File>,

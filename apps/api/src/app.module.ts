@@ -8,10 +8,10 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./modules/auth/auth.module";
-import { UsersModule } from "./modules/users/users.module";
-import{CollectionsModule} from "./modules/collections/collections.module";
+import { CollectionsModule } from "./modules/collections/collections.module";
 import { PhotosModule } from "./modules/photos/photos.module";
 import { ProductsModule } from "./modules/products/products.module";
+import { UsersModule } from "./modules/users/users.module";
 
 @Module({
 	imports: [
