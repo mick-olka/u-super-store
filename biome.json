@@ -18,7 +18,8 @@
 			"**/generated/**",
 			"**/out/**",
 			"**/.turbo/**",
-			"**/public/**"
+			"**/public/**",
+			"**/.vscode/**"
 		]
 	},
 	"formatter": {

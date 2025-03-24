@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { type HydratedDocument, now } from "mongoose";
+import { type HydratedDocument, type Types, now } from "mongoose";
 import { getMongoRef } from "./data";
 
 export type UserDocument = HydratedDocument<User>;
@@ -13,6 +13,8 @@ export type ReqWithUser = Request & { user: { sub: string } };
 
 @Schema()
 export class User {
+	_id: Types.ObjectId;
+
 	@Prop({ type: String, required: true })
 	first_name: string;
 
@@ -25,7 +27,7 @@ export class User {
 	@Prop({ type: Date, default: now() })
 	updatedAt: string;
 
-	@Prop({ type: String })
+	@Prop({ type: String, unique: true })
 	email: string;
 
 	@Prop({ type: String })

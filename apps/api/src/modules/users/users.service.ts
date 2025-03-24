@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
 // import { OnEvent } from "@nestjs/event-emitter";
 import { InjectModel } from "@nestjs/mongoose";
-// biome-ignore lint/style/useImportType: <explanation>
-import mongoose, { Model, PopulateOptions } from "mongoose";
+import type mongoose from "mongoose";
 import { Order } from "src/schemas/order.schema";
 import { UserRole } from "src/schemas/user.schema";
 // import { EVENTS } from "src/utils/constants";
@@ -13,7 +12,7 @@ import type { UpdateUserDto } from "./dto/update-user.dto";
 
 type UserI = User & { _id: mongoose.Types.ObjectId };
 
-const populateOrders: PopulateOptions = {
+const populateOrders: mongoose.PopulateOptions = {
 	path: "orders",
 	populate: {
 		// path: "orders",
@@ -27,7 +26,7 @@ const populateOrders: PopulateOptions = {
 export class UsersService {
 	constructor(
 		@InjectModel(User.name)
-		private readonly UserModel: Model<UserDocument>,
+		private readonly UserModel: mongoose.Model<UserDocument>,
 	) {}
 
 	async create(data: CreateUserDto): Promise<UserI> {
@@ -89,8 +88,8 @@ export class UsersService {
 	// 	);
 	// }
 
-	async ensureGuestUserExists(): Promise<User> {
-		let user = await this.UserModel.findOne({ name: "Guest" }).exec();
+	async ensureGuestUserExists(): Promise<void> {
+		let user = await this.findOne({ email: "guest@mail.com" });
 		if (!user) {
 			const guestUserData: CreateUserDto = {
 				first_name: "Guest",
@@ -100,8 +99,7 @@ export class UsersService {
 				hash: "guest",
 			};
 			user = new this.UserModel(guestUserData);
-			await user.save();
+			await this.create(guestUserData);
 		}
-		return user;
 	}
 }

@@ -16,164 +16,164 @@ import type { Tokens } from "./models";
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private userService: UsersService,
-    private jwtService: JwtService,
-    private config: ConfigService
-  ) {}
+	constructor(
+		private userService: UsersService,
+		private jwtService: JwtService,
+		private config: ConfigService,
+	) {}
 
-  async signUp(dto: SignUpDto): Promise<Tokens> {
-    let userRole = dto.type;
-    if (dto.admin_key !== this.config.get(envNames.ADMIN_KEY)) {
-      userRole = UserRole.user;
-      // throw new ForbiddenException("Access denied");
-    }
-    const hash = await this.hashData(dto.password);
-    const newUser = await this.userService.create({
-      first_name: dto.first_name,
-      last_name: dto.last_name,
-      email: dto.email,
-      hash,
-      role: userRole,
-    });
-    const tokens = await this.getTokens(
-      String(newUser._id),
-      newUser.email,
-      newUser.role
-    );
-    await this.updateRefreshToken(String(newUser._id), tokens.refresh_token);
-    return tokens;
-  }
+	async signUp(dto: SignUpDto): Promise<Tokens> {
+		let userRole = dto.type;
+		if (dto.admin_key !== this.config.get(envNames.ADMIN_KEY)) {
+			userRole = UserRole.user;
+			// throw new ForbiddenException("Access denied");
+		}
+		const hash = await this.hashData(dto.password);
+		const newUser = await this.userService.create({
+			first_name: dto.first_name,
+			last_name: dto.last_name,
+			email: dto.email,
+			hash,
+			role: userRole,
+		});
+		const tokens = await this.getTokens(
+			String(newUser._id),
+			newUser.email,
+			newUser.role,
+		);
+		await this.updateRefreshToken(String(newUser._id), tokens.refresh_token);
+		return tokens;
+	}
 
-  async signIn(dto: SignInDto): Promise<Tokens> {
-    const user = await this.userService.findOne({
-      email: dto.email,
-    });
+	async signIn(dto: SignInDto): Promise<Tokens> {
+		const user = await this.userService.findOne({
+			email: dto.email,
+		});
 
-    if (!user) throw new ForbiddenException("Access denied");
+		if (!user) throw new ForbiddenException("Access denied");
 
-    const passwordMatches = await bcrypt.compare(dto.password, user.hash);
+		const passwordMatches = await bcrypt.compare(dto.password, user.hash);
 
-    if (!passwordMatches) throw new ForbiddenException("Access denied");
+		if (!passwordMatches) throw new ForbiddenException("Access denied");
 
-    const tokens = await this.getTokens(
-      String(user._id),
-      user.email,
-      user.role
-    );
-    await this.updateRefreshToken(String(user._id), tokens.refresh_token);
-    return tokens;
-  }
+		const tokens = await this.getTokens(
+			String(user._id),
+			user.email,
+			user.role,
+		);
+		await this.updateRefreshToken(String(user._id), tokens.refresh_token);
+		return tokens;
+	}
 
-  async signInAdmin(dto: SignInDto): Promise<Tokens> {
-    const user = await this.userService.findOne({
-      email: dto.email,
-    });
+	async signInAdmin(dto: SignInDto): Promise<Tokens> {
+		const user = await this.userService.findOne({
+			email: dto.email,
+		});
 
-    if (!user) throw new ForbiddenException("Access denied");
+		if (!user) throw new ForbiddenException("Access denied");
 
-    const passwordMatches = await bcrypt.compare(dto.password, user.hash);
+		const passwordMatches = await bcrypt.compare(dto.password, user.hash);
 
-    if (!passwordMatches || user.role !== UserRole.admin)
-      throw new ForbiddenException("Access denied");
+		if (!passwordMatches || user.role !== UserRole.admin)
+			throw new ForbiddenException("Access denied");
 
-    const tokens = await this.getTokens(
-      String(user._id),
-      user.email,
-      user.role
-    );
-    await this.updateRefreshToken(String(user._id), tokens.refresh_token);
-    return tokens;
-  }
+		const tokens = await this.getTokens(
+			String(user._id),
+			user.email,
+			user.role,
+		);
+		await this.updateRefreshToken(String(user._id), tokens.refresh_token);
+		return tokens;
+	}
 
-  async logout(
-    userId: string,
-    userEmail: string
-  ): Promise<{ message: string }> {
-    await this.userService.updateOne(
-      {
-        _id: userId,
-        hashedRt: {
-          $ne: null,
-        },
-      },
-      {
-        hashedRt: null,
-      }
-    );
+	async logout(
+		userId: string,
+		userEmail: string,
+	): Promise<{ message: string }> {
+		await this.userService.updateOne(
+			{
+				_id: userId,
+				hashedRt: {
+					$ne: null,
+				},
+			},
+			{
+				hashedRt: null,
+			},
+		);
 
-    return {
-      message: `Success, logged out ${userEmail}`,
-    };
-  }
+		return {
+			message: `Success, logged out ${userEmail}`,
+		};
+	}
 
-  async refreshTokens(
-    userId: string,
-    rt: string
-  ): Promise<{ new_token: string }> {
-    const user = await this.userService.findById(userId);
-    if (!user) throw new ForbiddenException("Access denied");
+	async refreshTokens(
+		userId: string,
+		rt: string,
+	): Promise<{ new_token: string }> {
+		const user = await this.userService.findById(userId);
+		if (!user) throw new ForbiddenException("Access denied");
 
-    const refreshTokenMatches = await bcrypt.compare(rt, user.hashedRt);
+		const refreshTokenMatches = await bcrypt.compare(rt, user.hashedRt);
 
-    if (!refreshTokenMatches) throw new ForbiddenException("Access denied");
+		if (!refreshTokenMatches) throw new ForbiddenException("Access denied");
 
-    const tokens = await this.getTokens(
-      String(user._id),
-      user.email,
-      user.role
-    );
-    await this.updateRefreshToken(String(user._id), tokens.refresh_token);
+		const tokens = await this.getTokens(
+			String(user._id),
+			user.email,
+			user.role,
+		);
+		await this.updateRefreshToken(String(user._id), tokens.refresh_token);
 
-    return {
-      new_token: tokens.access_token,
-    };
-  }
+		return {
+			new_token: tokens.access_token,
+		};
+	}
 
-  async updateRefreshToken(userId: string, refreshToken: string) {
-    const hash = await this.hashData(refreshToken);
-    await this.userService.updateOneById(userId, {
-      hashedRt: hash,
-    });
-  }
+	async updateRefreshToken(userId: string, refreshToken: string) {
+		const hash = await this.hashData(refreshToken);
+		await this.userService.updateOneById(userId, {
+			hashedRt: hash,
+		});
+	}
 
-  hashData(data: string) {
-    return bcrypt.hash(data, 10);
-  }
+	hashData(data: string) {
+		return bcrypt.hash(data, 10);
+	}
 
-  async getTokens(
-    userId: string,
-    email: string,
-    userRole: UserRole
-  ): Promise<Tokens> {
-    const [at, rt] = await Promise.all([
-      this.jwtService.signAsync(
-        {
-          sub: userId,
-          email,
-          role: userRole,
-        },
-        {
-          secret: this.config.get<string>(envNames.ACCESS_TOKEN_SECRET),
-          expiresIn: 60 * 60 * 24,
-        }
-      ),
-      this.jwtService.signAsync(
-        {
-          sub: userId,
-          email,
-          role: userRole,
-        },
-        {
-          secret: this.config.get<string>(envNames.REFRESH_TOKEN_SECRET),
-          expiresIn: 60 * 60 * 24 * 7,
-        }
-      ),
-    ]);
+	async getTokens(
+		userId: string,
+		email: string,
+		userRole: UserRole,
+	): Promise<Tokens> {
+		const [at, rt] = await Promise.all([
+			this.jwtService.signAsync(
+				{
+					sub: userId,
+					email,
+					role: userRole,
+				},
+				{
+					secret: this.config.get<string>(envNames.ACCESS_TOKEN_SECRET),
+					expiresIn: 60 * 60 * 24,
+				},
+			),
+			this.jwtService.signAsync(
+				{
+					sub: userId,
+					email,
+					role: userRole,
+				},
+				{
+					secret: this.config.get<string>(envNames.REFRESH_TOKEN_SECRET),
+					expiresIn: 60 * 60 * 24 * 7,
+				},
+			),
+		]);
 
-    return {
-      access_token: at,
-      refresh_token: rt,
-    };
-  }
+		return {
+			access_token: at,
+			refresh_token: rt,
+		};
+	}
 }
