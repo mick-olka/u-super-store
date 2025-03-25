@@ -13,6 +13,7 @@ import { PhotosModule } from "./modules/photos/photos.module";
 import { ProductsModule } from "./modules/products/products.module";
 import { UsersModule } from "./modules/users/users.module";
 import { OrdersModule } from "./modules/orders/orders.module";
+import{TextBlocksModule} from "./modules/text_blocks/textBlocks.module";
 
 @Module({
 	imports: [
@@ -35,6 +36,7 @@ import { OrdersModule } from "./modules/orders/orders.module";
 		PhotosModule,
 		ProductsModule,
 		OrdersModule,
+		TextBlocksModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
