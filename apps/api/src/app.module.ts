@@ -12,6 +12,7 @@ import { CollectionsModule } from "./modules/collections/collections.module";
 import { PhotosModule } from "./modules/photos/photos.module";
 import { ProductsModule } from "./modules/products/products.module";
 import { UsersModule } from "./modules/users/users.module";
+import { OrdersModule } from "./modules/orders/orders.module";
 
 @Module({
 	imports: [
@@ -33,6 +34,7 @@ import { UsersModule } from "./modules/users/users.module";
 		CollectionsModule,
 		PhotosModule,
 		ProductsModule,
+		OrdersModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
