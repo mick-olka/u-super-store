@@ -24,7 +24,7 @@ Install project dependencies
 
 ``` bash
 # perform formatting and linting
-pnpm biome check --write
+pnpm biome check
 # check that everything works
 pnpm run dev
 ```
