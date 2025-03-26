@@ -9,11 +9,11 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./modules/auth/auth.module";
 import { CollectionsModule } from "./modules/collections/collections.module";
+import { OrdersModule } from "./modules/orders/orders.module";
 import { PhotosModule } from "./modules/photos/photos.module";
 import { ProductsModule } from "./modules/products/products.module";
+import { TextBlocksModule } from "./modules/text_blocks/textBlocks.module";
 import { UsersModule } from "./modules/users/users.module";
-import { OrdersModule } from "./modules/orders/orders.module";
-import{TextBlocksModule} from "./modules/text_blocks/textBlocks.module";
 
 @Module({
 	imports: [

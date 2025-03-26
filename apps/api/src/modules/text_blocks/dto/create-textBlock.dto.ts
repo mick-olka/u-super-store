@@ -1,36 +1,36 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsNotEmpty,
-  IsNotEmptyObject,
-  IsOptional,
-  IsString,
-} from 'class-validator'
-import { default_locales, I_Locales } from 'src/schemas/data'
+	IsNotEmpty,
+	IsNotEmptyObject,
+	IsOptional,
+	IsString,
+} from "class-validator";
+import { type I_Locales, default_locales } from "src/schemas/data";
 
 const notRequired = {
-  required: false,
-}
+	required: false,
+};
 
 export class CreateTextBlockDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  name: string
+	@ApiProperty()
+	@IsNotEmpty()
+	@IsString()
+	name: string;
 
-  @ApiProperty({ default: default_locales })
-  @IsNotEmptyObject()
-  text: I_Locales
+	@ApiProperty({ default: default_locales })
+	@IsNotEmptyObject()
+	text: I_Locales;
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  font?: {
-    size?: number
-    weight?: number
-    color?: number
-  }
+	@ApiProperty(notRequired)
+	@IsOptional()
+	font?: {
+		size?: number;
+		weight?: number;
+		color?: number;
+	};
 
-  @ApiProperty(notRequired)
-  @IsOptional()
-  @IsString()
-  url?: string
+	@ApiProperty(notRequired)
+	@IsOptional()
+	@IsString()
+	url?: string;
 }
