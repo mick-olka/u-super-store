@@ -1,0 +1,96 @@
+import type { Dictionary } from "./model";
+
+export const dictionaryUA: Dictionary = {
+	cart: {
+		my_order: "Моє замовлення",
+		// delivery_note: "Відправка відбувається Новою Поштою за вказаною у формі адресою",
+		delivery_note:
+			"З вами зв'яжеться менеджер для уточнення деталей, способу доставки та оплати",
+		make_order: "Зробити замовлення",
+		in_cart: "У кошику",
+		sum: "Сума",
+		product_name: "Назва товару",
+		quantity: "К-ть",
+		price: "Ціна",
+		payment_types: {
+			card: "Банківська картка",
+			post: "Поштовий переказ (при отриманні)",
+		},
+		form: {
+			address_placeholder: "Адреса доставки та коментар",
+			name_placeholder: "Ім'я",
+			phone_placeholder: "Номер телефону",
+			payment_method: "Метод оплати",
+		},
+	},
+	sidebar: {
+		home: "Головна",
+		cart: "Мій кошик",
+		about: "Інформація",
+		categories: "Категорії",
+	},
+	header: {
+		search: "Пошук",
+	},
+	footer: {
+		privacy_policy: "Політика конфіденційності",
+		terms_of_service: "Умови користування",
+	},
+	product: {
+		add_to_cart: "Купити",
+		taxes: "З урахуванням усіх податків",
+		quantity: "К-ть",
+		specification: "Колір",
+		description: "Опис",
+		related_products: "Пов'язані товари",
+		similar_products: "Схожі товари",
+		features: "Характеристики",
+		currency: "₴",
+	},
+	search: {
+		search_results: "Результати пошуку для: ",
+		no_results:
+			"За вашим запитом нічого не знайдено, перевірте правильність вводу",
+	},
+	auth: {
+		login: "Логін",
+		register: "Реєстрація",
+		back_to_login: "Назад до логіну",
+		email: "Ел. пошта",
+		password: "Пароль",
+		first_name: "Ім'я",
+		last_name: "Фамілія",
+		main_page: "Назад на головну",
+		repeat_password: "Повторити пароль",
+	},
+	profile: {
+		account: "Профіль користувача",
+		save: "Зберегти",
+		orders_label: "Переглянути історію моїх замовлень",
+		orders: "Мої замовлення",
+		logout_label: "Вийти з акаунта та стерти мій кеш з цього пристрою",
+		logout: "Вийти",
+		delete_label: "Ви можете видалити всі свої дані з цього магазину",
+		delete: "Видалити мій акаунт",
+		irreversible_warning: "Цю дію не можна відмінити",
+		update_settings:
+			"Змінити дані користувача. Обрати електроннну почту чи ім'я",
+	},
+	order: {
+		order: "Замовлення",
+		customer: "Замовник",
+		status: "Статус",
+		phone_number: "Номер тел.",
+		name: "Назва",
+		price: "Ціна",
+		quantity: "К-ть",
+		discount: "Знижка",
+		remark: "Повідомлення",
+		time: "Час",
+		total: "Загалом",
+		orders: "Замовлення",
+		order_id: "Номер замовлення",
+		check: "Переглянути",
+		date: "Дата",
+	},
+};
