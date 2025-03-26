@@ -10,5 +10,8 @@
     "source.organizeImports.biome": "explicit",
     "source.fixAll.biome": "never"
   },
-  "cSpell.words": ["injectables"]
+  "cSpell.words": ["injectables"],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
 }
