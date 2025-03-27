@@ -27,14 +27,15 @@ import type mongoose from "mongoose";
 import type { Product } from "src/schemas/product.schema";
 import { deleteFile } from "src/utils/files";
 import { NotFoundInterceptor } from "src/utils/injectables";
-// import { preparePhotos } from "src/utils/utils";
 import type { PromisePaginationResT } from "src/utils/interfaces";
+import { preparePhotos } from "src/utils/utils";
 import { thumbnailInterceptor } from "src/utils/utils";
 import { parseFormDataToJSON, transliterate } from "../../utils/utils";
+// biome-ignore lint/style/useImportType: <explanation>
 import { CreateProductMultipartDto } from "./dto/create-product.dto";
-import {
+import type {
 	UpdateProductMultipartDto,
-	type UpdateProductRelatedDto,
+	UpdateProductRelatedDto,
 } from "./dto/update-product.dto";
 // biome-ignore lint/style/useImportType: <explanation>
 import { ProductsService } from "./products.service";
@@ -99,61 +100,65 @@ export class ProductsController {
 		return this.productsService.findOne(id);
 	}
 
-	//   @Post()
-	//   @UseGuards(AuthGuard("jwt"))
-	//   @HttpCode(HttpStatus.CREATED)
-	//   @ApiConsumes("multipart/form-data")
-	//   @UseInterceptors(thumbnailInterceptor)
-	//   @ApiResponse({
-	//     status: HttpStatus.CREATED,
-	//     description: "Successfully created product.",
-	//   })
-	//   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: "Forbidden." })
-	//   async create(
-	//     @Body() data: CreateProductMultipartDto,
-	//     @UploadedFile() thumbnail: Express.Multer.File
-	//   ): Promise<ProductI> {
-	//     const product_data: any = parseFormDataToJSON(data);
-	//     if (product_data.collections) {
-	//       throw new HttpException(
-	//         'Forbidden field "collections". Use PUT api/collections/ to update collection items',
-	//         HttpStatus.BAD_REQUEST
-	//       );
-	//     }
-	//     if (!product_data.url_name)
-	//       product_data.url_name = transliterate(product_data.name.ua);
-	//     if (thumbnail) {
-	//       preparePhotos([thumbnail], 640);
-	//       product_data.thumbnail = thumbnail.filename;
-	//     }
-	//     return this.productsService.create(product_data);
-	//   }
+	@Post()
+	@UseGuards(AuthGuard("jwt"))
+	@HttpCode(HttpStatus.CREATED)
+	@ApiConsumes("multipart/form-data")
+	@UseInterceptors(thumbnailInterceptor)
+	@ApiResponse({
+		status: HttpStatus.CREATED,
+		description: "Successfully created product.",
+	})
+	@ApiResponse({ status: HttpStatus.FORBIDDEN, description: "Forbidden." })
+	async create(
+		@Body() data: CreateProductMultipartDto,
+		@UploadedFile() thumbnail: Express.Multer.File,
+	): Promise<ProductI> {
+		// @ts-ignore
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		const product_data: any = parseFormDataToJSON(data);
+		if (product_data.collections) {
+			throw new HttpException(
+				'Forbidden field "collections". Use PUT api/collections/ to update collection items',
+				HttpStatus.BAD_REQUEST,
+			);
+		}
+		if (!product_data.url_name)
+			product_data.url_name = transliterate(product_data.name.ua);
+		if (thumbnail) {
+			preparePhotos([thumbnail], 640);
+			product_data.thumbnail = thumbnail.filename;
+		}
+		return this.productsService.create(product_data);
+	}
 
-	//   @Patch(":id")
-	//   @UseGuards(AuthGuard("jwt"))
-	//   @HttpCode(HttpStatus.OK)
-	//   @ApiConsumes("multipart/form-data")
-	//   @UseInterceptors(thumbnailInterceptor)
-	//   @ApiResponse({
-	//     status: HttpStatus.OK,
-	//     description: "Successfully updated product.",
-	//   })
-	//   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: "Forbidden." })
-	//   async update(
-	//     @Param("id") id: string,
-	//     @Body() data: UpdateProductMultipartDto,
-	//     @UploadedFile() thumbnail: Express.Multer.File
-	//   ): Promise<ProductI> {
-	//     const p_dat: any = parseFormDataToJSON(data);
-	//     if (thumbnail) {
-	//       preparePhotos([thumbnail], 640);
-	//       p_dat.thumbnail = thumbnail.filename;
-	//       const prevProd = await this.productsService.findOne(id);
-	//       const prevThumbnail = prevProd.thumbnail;
-	//       deleteFile(prevThumbnail);
-	//     }
-	//     return this.productsService.update(id, p_dat);
-	//   }
+	@Patch(":id")
+	@UseGuards(AuthGuard("jwt"))
+	@HttpCode(HttpStatus.OK)
+	@ApiConsumes("multipart/form-data")
+	@UseInterceptors(thumbnailInterceptor)
+	@ApiResponse({
+		status: HttpStatus.OK,
+		description: "Successfully updated product.",
+	})
+	@ApiResponse({ status: HttpStatus.FORBIDDEN, description: "Forbidden." })
+	async update(
+		@Param("id") id: string,
+		@Body() data: UpdateProductMultipartDto,
+		@UploadedFile() thumbnail: Express.Multer.File,
+	): Promise<ProductI> {
+		// @ts-ignore
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		const p_dat: any = parseFormDataToJSON(data);
+		if (thumbnail) {
+			preparePhotos([thumbnail], 640);
+			p_dat.thumbnail = thumbnail.filename;
+			const prevProd = await this.productsService.findOne(id);
+			const prevThumbnail = prevProd.thumbnail;
+			deleteFile(prevThumbnail);
+		}
+		return this.productsService.update(id, p_dat);
+	}
 
 	@Put(":id")
 	@UseGuards(AuthGuard("jwt"))
