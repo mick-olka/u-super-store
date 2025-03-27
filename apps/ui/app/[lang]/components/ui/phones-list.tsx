@@ -1,7 +1,7 @@
 "use client";
 
-import { PhoneIcon } from "@/app/assets/icons/phone";
-import { Dropdown } from "@/app/components/ui/dropdown/dropdown";
+import { PhoneIcon } from "@/app/[lang]/assets/icons/phone";
+import { Dropdown } from "@/app/[lang]/components/ui/dropdown/dropdown";
 import Link from "next/link";
 import React from "react";
 

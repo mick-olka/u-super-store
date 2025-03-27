@@ -1,4 +1,4 @@
-import { classnames, createIcon } from "@/app/shared/utils";
+import { classnames, createIcon } from "@/shared/utils";
 
 export const CartIcon = createIcon(({ className, ...props }, ref) => (
 	<svg

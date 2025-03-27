@@ -11,15 +11,21 @@
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@formatjs/intl-localematcher": "^0.6.1",
 		"@repo/ui": "workspace:*",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"negotiator": "^1.0.0",
 		"next": "^15.2.1",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
-		"swr": "^2.3.3"
+		"swr": "^2.3.3",
+		"tailwind-merge": "^3.0.2"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
+		"@types/negotiator": "^0.6.3",
 		"@types/node": "^22.13.10",
 		"@types/react": "19.0.10",
 		"@types/react-dom": "19.0.4",

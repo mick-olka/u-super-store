@@ -1,4 +1,4 @@
-import { Dropdown } from "@/app/components/ui/dropdown/dropdown";
+import { Dropdown } from "@/app/[lang]/components/ui/dropdown/dropdown";
 import type { HTMLAttributes } from "react";
 
 import { classnames } from "@/shared/utils";
