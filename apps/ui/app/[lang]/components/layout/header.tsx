@@ -1,5 +1,4 @@
 import { InfoIcon } from "@/app/[lang]/assets/icons/info";
-// import { UserIcon } from "@/app/[lang]/assets/icons/user";
 import { Button } from "@/app/[lang]/components/button";
 import LocaleSwitcher from "@/app/[lang]/components/layout/locale-switcher";
 import { PhonesList } from "@/app/[lang]/components/ui/phones-list";

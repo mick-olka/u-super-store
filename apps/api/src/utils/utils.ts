@@ -20,8 +20,14 @@ export const parseFormDataToJSON = (
 ): Record<string, unknown> => {
 	const res = {};
 	for (const [key, value] of Object.entries(data)) {
-		if (value) res[key] = JSON.parse(String(value));
-		// if (isPrimitive(res[key]))
+		if (value) {
+			try {
+				res[key] = JSON.parse(String(value));
+			} catch (e) {
+				// If parsing fails, use the original value
+				res[key] = value;
+			}
+		}
 	}
 
 	return res;
