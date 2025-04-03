@@ -1,3 +1,4 @@
+"use client";
 import { globalConfig } from "@/shared/configs/global";
 import type { Locale } from "@/shared/configs/i18n-config";
 import { E_AppRoutes, type T_RegisterForm } from "@/shared/models";
