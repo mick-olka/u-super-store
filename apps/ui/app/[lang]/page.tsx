@@ -15,11 +15,12 @@ import { getProducts } from "@/shared/service";
 
 type Props = PageProps<{ lang: string }>;
 export default async function Home({ params }: Props) {
+	const { lang } = await params;
 	const data = await getProducts();
 
 	return (
 		<div className="w-full p-4">
-			<ProductsGrid products={data.docs} lang={params.lang} />
+			<ProductsGrid products={data.docs} lang={lang} />
 		</div>
 	);
 }

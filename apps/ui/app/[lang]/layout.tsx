@@ -49,7 +49,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 type Props = Readonly<{
-	params: { lang: Locale };
+	params: Promise<{ lang: Locale }>;
 	children: React.ReactNode;
 }>;
 
@@ -57,17 +57,16 @@ export async function generateMetadata(
 	{ params }: Props,
 	parent: ResolvingMetadata,
 ): Promise<Metadata> {
+	const { lang } = await params;
 	const description = await getTextByName(TextBlocks.main_description);
 	return {
 		title: "Shop",
-		description: description.text[params.lang],
+		description: description.text[lang],
 	};
 }
 
-export default async function RootLayout({
-	params: { lang },
-	children,
-}: Props) {
+export default async function RootLayout({ params, children }: Props) {
+	const { lang } = await params;
 	const collections = await getCollections();
 	const dictionary = await getDictionary(lang);
 	const phones = await getTextByName(TextBlocks.phones);

@@ -12,9 +12,14 @@ import { type ReactNode, useEffect, useState } from "react";
 interface I_Props {
 	photos: I_PhotosBlock[];
 	onSpecificationSelect?: (p: I_PhotosBlock | null) => void;
+	defaultPhoto?: string;
 }
 
-export const Gallery = ({ photos, onSpecificationSelect }: I_Props) => {
+export const Gallery = ({
+	photos,
+	onSpecificationSelect,
+	defaultPhoto,
+}: I_Props) => {
 	const isOnlyOneVariant = photos.length < 2;
 	const [current, setCurrent] = useState<string | null>(
 		isOnlyOneVariant && photos[0] ? photos[0]._id : "all",
@@ -51,7 +56,13 @@ export const Gallery = ({ photos, onSpecificationSelect }: I_Props) => {
 			);
 		}
 		return [
-			<Image key={1} alt={"No photo"} width={640} height={640} src={NoImage} />,
+			<Image
+				key={1}
+				alt={"No photo"}
+				width={640}
+				height={640}
+				src={defaultPhoto || NoImage}
+			/>,
 		];
 	};
 
