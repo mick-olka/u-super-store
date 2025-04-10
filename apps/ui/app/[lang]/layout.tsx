@@ -44,7 +44,7 @@ import { getCollections, getTextByName } from "@/shared/service";
 import type { Metadata, ResolvingMetadata } from "next";
 import { Inter } from "next/font/google";
 
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,28 +71,24 @@ export default async function RootLayout({ params, children }: Props) {
 	const dictionary = await getDictionary(lang);
 	const phones = await getTextByName(TextBlocks.phones);
 	return (
-		<html lang={lang}>
-			<body className={inter.className}>
-				<DictionaryProvider dictionary={dictionary}>
-					<main
-						className="min-h-screen w-full bg-gray-100 text-gray-700 overflow-hidden"
-						x-data="layout"
-						style={{ minWidth: "360px" }}
-					>
-						<Header lang={lang} phones={phones} />
-						<div className="flex min-h-screen pt-12">
-							<Sidebar list={collections} dictionary={dictionary} lang={lang} />
-							<MobileSidebar
-								list={collections}
-								dictionary={dictionary}
-								lang={lang}
-							/>
-							{children}
-						</div>
-						<Footer dictionary={dictionary} lang={lang} />
-					</main>
-				</DictionaryProvider>
-			</body>
-		</html>
+		<DictionaryProvider dictionary={dictionary}>
+			<main
+				className="min-h-screen w-full bg-gray-100 text-gray-700 overflow-hidden"
+				x-data="layout"
+				style={{ minWidth: "360px" }}
+			>
+				<Header lang={lang} phones={phones} />
+				<div className="flex min-h-screen pt-12">
+					<Sidebar list={collections} dictionary={dictionary} lang={lang} />
+					<MobileSidebar
+						list={collections}
+						dictionary={dictionary}
+						lang={lang}
+					/>
+					{children}
+				</div>
+				<Footer dictionary={dictionary} lang={lang} />
+			</main>
+		</DictionaryProvider>
 	);
 }
