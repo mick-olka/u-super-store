@@ -2,7 +2,7 @@ version: "3"
 
 services:
   admin:
-    container_name: rotang_admin
+    container_name: store_admin
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,9 +10,9 @@ services:
     ports:
       - 3005:80
     networks:
-      - rotang_network
+      - store_network
     env_file:
       - .env
 networks:
-  rotang_network:
+  store_network:
     external: true

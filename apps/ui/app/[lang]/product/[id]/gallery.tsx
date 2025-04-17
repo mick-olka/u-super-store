@@ -62,6 +62,7 @@ export const Gallery = ({
 				width={640}
 				height={640}
 				src={defaultPhoto || NoImage}
+				className="object-contain"
 			/>,
 		];
 	};

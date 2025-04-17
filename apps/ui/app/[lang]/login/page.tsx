@@ -11,8 +11,10 @@ import { useForm } from "react-hook-form";
 
 import { emailRule, localeUrl, requiredRule } from "@/shared/utils";
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
-export default function LoginPage({ params: { lang } }: PageProps<{}>) {
+type Props = PageProps<{ _: string }, { _: string }>;
+
+export default async function LoginPage({ params }: Props) {
+	const { lang } = await params;
 	const { signIn } = useSignIn(lang);
 	const dictionary = useDictionary();
 	const {
