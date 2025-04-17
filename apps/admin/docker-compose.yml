@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  admin:
+    container_name: rotang_admin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3005:80
+    networks:
+      - rotang_network
+    env_file:
+      - .env
+networks:
+  rotang_network:
+    external: true

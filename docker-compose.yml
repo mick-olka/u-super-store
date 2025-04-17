@@ -1,0 +1,34 @@
+services:
+  api:
+    container_name: store_api
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 7500:7500
+    networks:
+      - store_network
+    volumes:
+      - ./apps/api/upload:/app/upload
+    env_file:
+      - ./apps/api/.env
+
+  client:
+    container_name: store_client
+    build:
+      context: ./apps/ui
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - store_network
+    env_file:
+      - ./apps/ui/.env.production
+    depends_on:
+      - api
+
+networks:
+  store_network:
+    external: true
