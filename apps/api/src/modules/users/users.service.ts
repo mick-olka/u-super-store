@@ -1,11 +1,14 @@
 import { Injectable } from "@nestjs/common";
+import { OnEvent } from "@nestjs/event-emitter";
 // import { OnEvent } from "@nestjs/event-emitter";
 import { InjectModel } from "@nestjs/mongoose";
 import type mongoose from "mongoose";
 import { Order } from "src/schemas/order.schema";
 import { UserRole } from "src/schemas/user.schema";
+import { EVENTS } from "src/utils/constants";
 // import { EVENTS } from "src/utils/constants";
 import { User, type UserDocument } from "../../schemas/user.schema";
+import type { OrderCreatedEvent } from "../orders/events";
 // import type { OrderCreatedEvent } from "../orders/events";
 import type { CreateUserDto } from "./dto/create-user.dto";
 import type { UpdateUserDto } from "./dto/update-user.dto";
@@ -78,15 +81,15 @@ export class UsersService {
 		return deletedUser;
 	}
 
-	// @OnEvent(EVENTS.order_created)
-	// async handleOrderCreatedEvent(event: OrderCreatedEvent) {
-	// 	// add order to user's orders list
-	// 	await this.UserModel.findOneAndUpdate(
-	// 		{ _id: event.user_id },
-	// 		{ $push: { orders: event.order_id } },
-	// 		{ new: true },
-	// 	);
-	// }
+	@OnEvent(EVENTS.order_created)
+	async handleOrderCreatedEvent(event: OrderCreatedEvent) {
+		// add order to user's orders list
+		await this.UserModel.findOneAndUpdate(
+			{ _id: event.user_id },
+			{ $push: { orders: event.order_id } },
+			{ new: true },
+		);
+	}
 
 	async ensureGuestUserExists(): Promise<void> {
 		let user = await this.findOne({ email: "guest@mail.com" });

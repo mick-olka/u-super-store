@@ -38,8 +38,7 @@ export const DataTable = <T,>(props: I_Props<T>) => {
 			hideFooter
 			hideFooterPagination={!pagination}
 			onRowSelectionModelChange={(ids: GridRowSelectionModel) => {
-				// @ts-ignore
-				onSelect(ids as string[]);
+				onSelect(Array.from(ids.ids) as string[]);
 			}}
 			initialState={{
 				pagination: { paginationModel: { pageSize } },
