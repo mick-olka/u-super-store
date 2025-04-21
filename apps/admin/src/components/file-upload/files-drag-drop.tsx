@@ -1,34 +1,46 @@
-import { Box, SxProps, Theme } from '@mui/material'
-import { FileUploader } from 'react-drag-drop-files'
+import { Box, type SxProps, type Theme } from "@mui/material";
+import { FileUploader } from "react-drag-drop-files";
 
-import { fileTypes } from './data'
+import { fileTypes } from "./data";
 
 interface I_Props {
-  onDrop: (files: File[]) => void
-  children: React.ReactNode
-  sx?: SxProps<Theme>
+	onDrop: (files: File[]) => void;
+	children: React.ReactNode;
+	sx?: SxProps<Theme>;
 }
 
 export const FilesDragDrop = ({ sx, onDrop, children }: I_Props) => {
-  const handleChange = (files: File[]) => {
-    console.log(files)
-    onDrop(files)
-  }
-  return (
-    <Box sx={{ ...sx, width: '100%', height: '100%', '& div': { cursor: 'pointer' } }}>
-      <FileUploader handleChange={handleChange} name='file' types={fileTypes} multiple>
-        <Box
-          sx={{
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          {/* {files.length ? (
+	const handleChange = (files: File[]) => {
+		console.log(files);
+		onDrop(files);
+	};
+	return (
+		<Box
+			sx={{
+				...sx,
+				width: "100%",
+				height: "100%",
+				"& div": { cursor: "pointer" },
+			}}
+		>
+			<FileUploader
+				handleChange={handleChange}
+				name="file"
+				types={fileTypes}
+				multiple
+			>
+				<Box
+					sx={{
+						textAlign: "center",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "center",
+						width: "100%",
+						height: "100%",
+					}}
+				>
+					{/* {files.length ? (
               <FilesPane removeFile={removeFile} files={files} />
             ) : (
               <>
@@ -46,9 +58,9 @@ export const FilesDragDrop = ({ sx, onDrop, children }: I_Props) => {
                 <p>Drag a local files to upload</p>
               </>
             )} */}
-          {children}
-        </Box>
-      </FileUploader>
-    </Box>
-  )
-}
+					{children}
+				</Box>
+			</FileUploader>
+		</Box>
+	);
+};

@@ -1,1 +1,1 @@
-export { StatusWrapper } from './status-wrapper'
+export { StatusWrapper } from "./status-wrapper";

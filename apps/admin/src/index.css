@@ -2,27 +2,27 @@ html,
 body,
 #root,
 .App {
-  min-height: 100%;
+	min-height: 100%;
 }
 
 :root {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-synthesis: none;
-  line-height: 1.5;
-  text-rendering: optimizelegibility;
-  text-size-adjust: 100%;
-  color: rgb(255 255 255 / 87%);
-  background-color: #fff;
-  color-scheme: light dark;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	line-height: 1.5;
+	text-rendering: optimizelegibility;
+	text-size-adjust: 100%;
+	color: rgb(255 255 255 / 87%);
+	background-color: #fff;
+	color-scheme: light dark;
 }
 
 a {
-  font-weight: 500;
-  text-decoration: inherit;
-  color: inherit;
+	font-weight: 500;
+	text-decoration: inherit;
+	color: inherit;
 }
 
 /* button {
@@ -47,9 +47,9 @@ button:focus-visible {
 } */
 
 .flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /* @media (prefers-color-scheme: light) {

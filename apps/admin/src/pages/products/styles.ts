@@ -1,9 +1,9 @@
-import { Box, Avatar } from '@mui/material'
-import styled from 'styled-components'
+import { Avatar, Box } from "@mui/material";
+import styled from "styled-components";
 
 export const CreateProductPane = styled(Box)`
   margin: 1rem;
-`
+`;
 export const Thumbnail = styled(Avatar)`
   &&& {
     width: 100px;
@@ -12,4 +12,4 @@ export const Thumbnail = styled(Avatar)`
       object-fit: contain;
     }
   }
-`
+`;

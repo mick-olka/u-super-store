@@ -1,3 +1,3 @@
-export { MainLayout } from './main'
-export { Footer } from './main/footer'
-export * from './status'
+export { MainLayout } from "./main";
+export { Footer } from "./main/footer";
+export * from "./status";

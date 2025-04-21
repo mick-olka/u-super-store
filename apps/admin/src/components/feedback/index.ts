@@ -1,1 +1,1 @@
-export { SimpleError } from './simple-error'
+export { SimpleError } from "./simple-error";

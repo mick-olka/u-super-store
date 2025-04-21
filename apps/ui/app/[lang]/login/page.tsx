@@ -151,7 +151,7 @@ function LoginButton({ label }: { label: string }) {
 	//   }
 	// }, [data]);
 
-	const handleClick = (event: any) => {
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// if (pending) {
 		event.preventDefault();
 		// }

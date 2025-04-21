@@ -1,5 +1,5 @@
-import { Avatar, Box, Button, TextField } from '@mui/material'
-import styled from 'styled-components'
+import { Avatar, Box, Button, TextField } from "@mui/material";
+import styled from "styled-components";
 
 export const TextFieldStyled = styled(TextField)`
   &&& {
@@ -12,7 +12,7 @@ export const TextFieldStyled = styled(TextField)`
       font-size: 20px;
     }
   }
-`
+`;
 
 export const TextFieldBox = styled(Box)`
   display: flex;
@@ -21,26 +21,26 @@ export const TextFieldBox = styled(Box)`
   margin: 1rem auto;
   justify-content: space-between;
   align-items: center;
-`
+`;
 export const ItemsListPane = styled(Box)`
   &&& {
     height: calc(100% - 0.5rem);
     padding: 0 1rem;
   }
-`
+`;
 
 export const RoundButton = styled(Button)<{ width?: string }>`
   &&& {
-    height: ${(props) => props.width || '3rem'};
-    width: ${(props) => props.width || '3rem'};
+    height: ${(props) => props.width || "3rem"};
+    width: ${(props) => props.width || "3rem"};
     border-radius: 50%;
-    min-width: ${(props) => props.width || '3rem'};
+    min-width: ${(props) => props.width || "3rem"};
     background-color: ${({ theme }) => theme.components.button.bg};
     color: ${({ theme }) => theme.components.button.c};
     opacity: ${(props) => (props.disabled ? 0.5 : 1)};
     margin: 0.5rem;
   }
-`
+`;
 
 export const ControlPaneStyled = styled(Box)`
   display: flex;
@@ -51,13 +51,13 @@ export const ControlPaneStyled = styled(Box)`
   & > div > * {
     margin-right: 1rem;
   }
-`
+`;
 
 export const ControlPaneBox = styled(Box)`
   margin-right: 1rem;
   display: flex;
   align-items: center;
-`
+`;
 
 export const SubmitButton = styled(TextField)`
   &&& {
@@ -81,7 +81,7 @@ export const SubmitButton = styled(TextField)`
       min-width: 10rem;
     }
   }
-`
+`;
 
 export const ButtonStyled = styled(Button)`
   &&& {
@@ -92,13 +92,13 @@ export const ButtonStyled = styled(Button)`
     background-color: ${({ theme }) => theme.components.button.bg};
     color: ${({ theme }) => theme.components.button.c};
   }
-`
+`;
 export const MultipleLangFieldPane = styled(Box)`
   display: flex;
   position: relative;
   align-items: center;
   width: 100%;
-`
+`;
 
 export const ImageUploadIconStyled = styled(Box)`
   display: flex;
@@ -114,7 +114,7 @@ export const ImageUploadIconStyled = styled(Box)`
   &:hover {
     opacity: 1;
   }
-`
+`;
 
 // export const FieldBox = styled(Box)`
 //   display: flex;
@@ -127,7 +127,7 @@ export const Form = styled.form`
   /* justify-content: space-between; */
   margin: 1rem;
   /* flex-wrap: wrap; */
-`
+`;
 
 export const Thumbnail = styled(Avatar)`
   &&& {
@@ -137,7 +137,7 @@ export const Thumbnail = styled(Avatar)`
       object-fit: contain;
     }
   }
-`
+`;
 export const Image = styled(Avatar)`
   &&& {
     width: 150px;
@@ -146,4 +146,4 @@ export const Image = styled(Avatar)`
       object-fit: contain;
     }
   }
-`
+`;

@@ -16,7 +16,8 @@ import { useForm } from "react-hook-form";
 import { emailRule, localeUrl, requiredRule } from "@/shared/utils";
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
-export default function RegisterPage({ params }: PageProps<{}>) {
+export default async function RegisterPage({ params }: PageProps<{}>) {
+	const { lang } = await params;
 	const { signUp } = useRegister();
 	const dictionary = useDictionary();
 	const {
@@ -96,7 +97,7 @@ export default function RegisterPage({ params }: PageProps<{}>) {
 						<br />
 						<br />
 						<RegisterButton label={dictionary.auth.register} />
-						<Link href={localeUrl(E_AppRoutes.login, params.lang)}>
+						<Link href={localeUrl(E_AppRoutes.login, lang)}>
 							<Button className="mt-4 w-full" variant="bordered">
 								{dictionary.auth.back_to_login}
 							</Button>
@@ -148,7 +149,7 @@ export default function RegisterPage({ params }: PageProps<{}>) {
 				<div className="py-5">
 					<div className="grid grid-cols-2 gap-1">
 						<div className="text-center sm:text-left whitespace-nowrap">
-							<Link href={localeUrl(E_AppRoutes.home, params.lang)}>
+							<Link href={localeUrl(E_AppRoutes.home, lang)}>
 								<button
 									type="button"
 									className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
@@ -190,7 +191,7 @@ function RegisterButton({ label }: { label: string }) {
 	//   }
 	// }, [data]);
 
-	const handleClick = (event: any) => {
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// if (pending) {
 		event.preventDefault();
 		// }

@@ -1,51 +1,53 @@
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { IconButton } from '@mui/material'
-import { GridColDef } from '@mui/x-data-grid'
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { IconButton } from "@mui/material";
+import type { GridColDef } from "@mui/x-data-grid";
 
-import { I_Locales, I_TextBlock } from 'src/models'
+import type { I_Locales, I_TextBlock } from "src/models";
 
 export const text_blocks_columns: GridColDef[] = [
-  { field: 'name', headerName: 'Назва', width: 130 },
-  {
-    field: 'text',
-    headerName: 'text',
-    valueGetter: (params) => params.row.text.ua,
-    flex: 1,
-  },
-  {
-    field: 'edit',
-    headerName: '',
-    width: 50,
-    renderCell: () => (
-      <IconButton>
-        <EditOutlinedIcon />
-      </IconButton>
-    ),
-    align: 'right',
-  },
-]
+	{ field: "name", headerName: "Назва", width: 130 },
+	{
+		field: "text",
+		headerName: "text",
+		valueFormatter: (params: { ua: string }) => params.ua,
+		flex: 1,
+	},
+	{
+		field: "edit",
+		headerName: "",
+		width: 50,
+		renderCell: () => (
+			<IconButton>
+				<EditOutlinedIcon />
+			</IconButton>
+		),
+		align: "right",
+	},
+];
 
 const objectHasMatch = (loc: I_Locales, reg: RegExp) => {
-  const values = Object.values(loc)
-  for (const v in values) {
-    if (values[v].match(reg)) {
-      return true
-    }
-  }
-  return false
-}
+	const values = Object.values(loc);
+	for (const v in values) {
+		if (values[v].match(reg)) {
+			return true;
+		}
+	}
+	return false;
+};
 
 export const textBlocksFilter = (
-  tbs: I_TextBlock[] | undefined,
-  filter: string | null,
+	tbs: I_TextBlock[] | undefined,
+	filter: string | null,
 ): I_TextBlock[] => {
-  if (tbs) {
-    if (filter) {
-      const regE = new RegExp(filter, 'i')
-      const filtered = tbs.filter((i) => i.name.match(regE) || objectHasMatch(i.text, regE))
-      return filtered
-    }
-    return tbs
-  }
-  return []
-}
+	if (tbs) {
+		if (filter) {
+			const regE = new RegExp(filter, "i");
+			const filtered = tbs.filter(
+				(i) => i.name.match(regE) || objectHasMatch(i.text, regE),
+			);
+			return filtered;
+		}
+		return tbs;
+	}
+	return [];
+};

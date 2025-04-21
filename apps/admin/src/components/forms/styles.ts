@@ -1,5 +1,5 @@
-import { Box, IconButton } from '@mui/material'
-import styled from 'styled-components'
+import { Box, IconButton } from "@mui/material";
+import styled from "styled-components";
 
 export const FeaturesManagerWrapper = styled(Box)`
   /* width: 40rem; */
@@ -8,10 +8,10 @@ export const FeaturesManagerWrapper = styled(Box)`
   gap: 5px;
   margin: 2rem;
   text-align: left;
-`
+`;
 
 export const AddBtn = styled(IconButton)`
   &&& {
     background-color: #eee;
   }
-`
+`;

@@ -1,5 +1,5 @@
-import { Box } from '@mui/material'
-import styled from 'styled-components'
+import { Box } from "@mui/material";
+import styled from "styled-components";
 
 export const PhotoOverlay = styled(Box)`
   height: 100%;
@@ -13,7 +13,7 @@ export const PhotoOverlay = styled(Box)`
   &:hover {
     opacity: 1;
   }
-`
+`;
 export const InnerBorder = styled(Box)`
   margin-top: 3px;
   box-sizing: border-box;
@@ -24,8 +24,8 @@ export const InnerBorder = styled(Box)`
   min-width: 148px;
   height: 148px;
   cursor: pointer;
-`
+`;
 
 export const PhotosFormStyled = styled.form`
   padding-bottom: 0.3rem;
-`
+`;

@@ -1,3 +1,3 @@
 export enum Toastify {
-  default = 'default',
+	default = "default",
 }

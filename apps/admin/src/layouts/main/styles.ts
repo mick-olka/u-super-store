@@ -1,5 +1,5 @@
-import { Box } from '@mui/material'
-import styled from 'styled-components'
+import { Box } from "@mui/material";
+import styled from "styled-components";
 
 export const MainLayout = styled(Box)`
   position: relative;
@@ -7,7 +7,7 @@ export const MainLayout = styled(Box)`
   overflow: hidden;
   background-color: ${({ theme }) => theme.components.main.bg};
   color: ${({ theme }) => theme.components.main.c};
-`
+`;
 
 export const MainHeader = styled.header`
   padding: 1px 1rem;
@@ -17,7 +17,7 @@ export const MainHeader = styled.header`
   display: flex;
   justify-content: space-between;
   /* border-bottom: 2px solid ${({ theme }) => theme.colors.gray}; */
-`
+`;
 
 export const MainMiddle = styled.div`
   position: relative;
@@ -26,7 +26,7 @@ export const MainMiddle = styled.div`
   /* max-height: calc(94vh - 2px); */
   /* overflow: auto; */
   display: flex;
-`
+`;
 
 export const MainContent = styled.main`
   width: 100%;
@@ -36,7 +36,7 @@ export const MainContent = styled.main`
   & > div {
     height: fit-content;
   }
-`
+`;
 
 export const MainNav = styled.nav`
   background-color: ${({ theme }) => theme.components.nav.bg};
@@ -44,21 +44,21 @@ export const MainNav = styled.nav`
   width: 10rem;
   padding: 0.1rem;
   /* border-right: 1px solid ${({ theme }) => theme.colors.light_gray}; */
-`
+`;
 
 export const MainFooter = styled.footer`
   background-color: ${({ theme }) => theme.components.footer.bg};
   color: ${({ theme }) => theme.components.footer.c};
   height: 10vh;
-`
+`;
 
 export const FooterContent = styled(Box)`
   display: flex;
   & > p {
     margin: 1rem;
   }
-`
+`;
 
 export const HeaderText = styled.h1`
   margin: 0.3rem;
-`
+`;

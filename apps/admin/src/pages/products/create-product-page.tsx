@@ -1,41 +1,43 @@
-import { Box } from '@mui/material'
-import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Box } from "@mui/material";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
-import * as S from './styles'
+import * as S from "./styles";
 
-import { AvatarUploader, ProductForm } from 'src/components'
-import { useCreateProduct } from 'src/hooks'
-import { I_ProductForm } from 'src/models'
-import { ROUTES, getRouteWithId } from 'src/routing'
+import { AvatarUploader, ProductForm } from "src/components";
+import { useCreateProduct } from "src/hooks";
+import type { I_ProductForm } from "src/models";
+import { ROUTES, getRouteWithId } from "src/routing";
 
 export const CreateProductPage = () => {
-  const { create, isLoading, isError, product } = useCreateProduct()
+	const { create, isLoading, isError, product } = useCreateProduct();
 
-  const [file, setFile] = useState<File | undefined>(undefined)
-  const uploadAvatar = (file: File) => {
-    setFile(file)
-  }
+	const [file, setFile] = useState<File | undefined>(undefined);
+	const uploadAvatar = (file: File) => {
+		setFile(file);
+	};
 
-  const onSubmit = (data: I_ProductForm) => {
-    const create_data = { ...data, thumbnail: file }
-    create(create_data)
-  }
+	const onSubmit = (data: I_ProductForm) => {
+		const create_data = { ...data, thumbnail: file };
+		create(create_data);
+	};
 
-  return (
-    <S.CreateProductPane>
-      <h2>Створити товар</h2>
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{ width: '150px', height: '150px', margin: '2rem' }}>
-          <AvatarUploader
-            handleChange={uploadAvatar}
-            currentURL={file && URL.createObjectURL(file)}
-          />
-        </Box>
-        <ProductForm onSubmit={onSubmit} isLoading={isLoading} />
-      </Box>
-      {isError && <h3>Помилка при створенні товару</h3>}
-      {product && <Navigate to={getRouteWithId(ROUTES.product, product.data._id)} />}
-    </S.CreateProductPane>
-  )
-}
+	return (
+		<S.CreateProductPane>
+			<h2>Створити товар</h2>
+			<Box sx={{ display: "flex" }}>
+				<Box sx={{ width: "150px", height: "150px", margin: "2rem" }}>
+					<AvatarUploader
+						handleChange={uploadAvatar}
+						currentURL={file && URL.createObjectURL(file)}
+					/>
+				</Box>
+				<ProductForm onSubmit={onSubmit} isLoading={isLoading} />
+			</Box>
+			{isError && <h3>Помилка при створенні товару</h3>}
+			{product && (
+				<Navigate to={getRouteWithId(ROUTES.product, product.data._id)} />
+			)}
+		</S.CreateProductPane>
+	);
+};
