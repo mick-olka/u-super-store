@@ -60,7 +60,7 @@ export async function generateMetadata(
 	const { lang } = await params;
 	const description = await getTextByName(TextBlocks.main_description);
 	return {
-		title: "Shop",
+		title: "Shopease",
 		description: description.text[lang],
 	};
 }

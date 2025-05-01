@@ -23,5 +23,5 @@ export type LocaleParam<T extends object> = T & {
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
 export type PageProps<Params extends object, SearchParams = {}> = {
 	params: Promise<LocaleParam<Params>>;
-	searchParams: SearchParams;
+	searchParams: Promise<SearchParams>;
 };

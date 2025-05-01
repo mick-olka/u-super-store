@@ -29,6 +29,21 @@ services:
     depends_on:
       - api
 
+  admin:
+    container_name: store_admin
+    build:
+      context: ./apps/admin
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3005:80
+    networks:
+      - store_network
+    env_file:
+      - ./apps/admin/.env
+    depends_on:
+      - api
+
 networks:
   store_network:
-    external: true
+    name: store_network
