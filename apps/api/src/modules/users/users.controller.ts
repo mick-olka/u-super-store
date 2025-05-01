@@ -36,18 +36,6 @@ export class UsersController {
 		return this.usersService.findAll();
 	}
 
-	@Get("me")
-	@HttpCode(HttpStatus.OK)
-	@ApiResponse({
-		status: HttpStatus.OK,
-		description: "Successfully fetched my data.",
-	})
-	@ApiResponse({ status: HttpStatus.FORBIDDEN, description: "Forbidden." })
-	getMyData(@Req() req: ReqWithUser): Promise<User> {
-		const id = req.user.sub;
-		return this.usersService.findById(id);
-	}
-
 	@Get("me/orders")
 	@HttpCode(HttpStatus.OK)
 	@ApiResponse({
@@ -58,6 +46,18 @@ export class UsersController {
 	getUserOrders(@Req() req: ReqWithUser): Promise<User> {
 		const id = req.user.sub;
 		return this.usersService.getUserOrders(id);
+	}
+
+	@Get("me")
+	@HttpCode(HttpStatus.OK)
+	@ApiResponse({
+		status: HttpStatus.OK,
+		description: "Successfully fetched my data.",
+	})
+	@ApiResponse({ status: HttpStatus.FORBIDDEN, description: "Forbidden." })
+	getMyData(@Req() req: ReqWithUser): Promise<User> {
+		const id = req.user.sub;
+		return this.usersService.findById(id);
 	}
 
 	@Patch("me")

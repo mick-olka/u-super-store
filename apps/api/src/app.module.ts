@@ -27,8 +27,8 @@ import { UsersModule } from "./modules/users/users.module";
 			dest: "./upload",
 		}),
 		ServeStaticModule.forRoot({
-			rootPath: join(__dirname, "..", "upload"),
-			serveRoot: "/api/upload/", //last slash is important
+			rootPath: join(__dirname, "..", "..", "upload"),
+			serveRoot: "/api/upload", //last slash is important
 		}),
 		UsersModule,
 		AuthModule,

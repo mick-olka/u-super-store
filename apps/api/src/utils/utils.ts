@@ -20,8 +20,14 @@ export const parseFormDataToJSON = (
 ): Record<string, unknown> => {
 	const res = {};
 	for (const [key, value] of Object.entries(data)) {
-		if (value) res[key] = JSON.parse(String(value));
-		// if (isPrimitive(res[key]))
+		if (value) {
+			try {
+				res[key] = JSON.parse(String(value));
+			} catch (e) {
+				// If parsing fails, use the original value
+				res[key] = value;
+			}
+		}
 	}
 
 	return res;
@@ -53,27 +59,28 @@ Jimp.read(
 	watermark = image;
 });
 
-// export const preparePhotos = (
-// 	files: Array<Express.Multer.File>,
-// 	max_size: number,
-// ) => {
-// 	for (let i = 0; i < files.length; i++) {
-// 		Jimp.read(files[i].path, (err, img) => {
-// 			if (err) throw err;
-// 			else {
-// 				img
-// 					.scaleToFit(max_size, max_size) // resize
-// 					.quality(72); // set JPEG quality
-// 				const w = img.getWidth(),
-// 					h = img.getHeight();
-// 				watermark.scaleToFit(w / 2, 500);
-// 				img
-// 					.composite(watermark, w * 0.25, h / 2 - 145) // set watermark
-// 					.write(files[i].path); // save
-// 			}
-// 		});
-// 	}
-// };
+export const preparePhotos = (
+	files: Array<Express.Multer.File>,
+	max_size: number,
+) => {
+	for (let i = 0; i < files.length; i++) {
+		// @ts-ignore
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		Jimp.read(files[i].path, (err: unknown, img: any) => {
+			if (err) throw err;
+			img
+				.scaleToFit(max_size, max_size) // resize
+				.quality(72); // set JPEG quality
+			const w = img.getWidth();
+			const h = img.getHeight();
+			// @ts-ignore
+			watermark.scaleToFit(w / 2, 500);
+			img
+				.composite(watermark, w * 0.25, h / 2 - 145) // set watermark
+				.write(files[i].path); // save
+		});
+	}
+};
 
 export const getFilterForSearch = (
 	search_string: string | null,

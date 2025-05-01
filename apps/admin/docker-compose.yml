@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  admin:
+    container_name: store_admin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3005:80
+    networks:
+      - store_network
+    env_file:
+      - .env
+networks:
+  store_network:
+    external: true
